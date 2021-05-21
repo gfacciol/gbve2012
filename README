@@ -11,7 +11,7 @@ each will load the sequences, optical flows and masks from the data directory
 and then run an experiment by calling vp.m.
 The function vp.m (in the utils directory) implements the algorithm described in the paper.
 This implementation corresponds to the re-writing of the energy described in 
-the supplementary material: http://www.dtic.upf.edu/~rsadek/gbve/gbve_sup_mat.pdf
+the supplementary material: https://gfacciol.github.io/gbve2012/supp_mat.pdf
 
 The parameters of the code are named as in the paper, and the argument "algo"
 refers to the algorithm to be used. For instance BW_GBC uses the Backward
