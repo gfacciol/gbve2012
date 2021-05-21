@@ -1,5 +1,5 @@
 This MATLAB code provides an implementation for Sadek, Facciolo, Arias, Caselles,
-"A variational model for gradient-based video editing.", Submitted IJCV, 2012.
+"A variational model for gradient-based video editing.",  IJCV, 2012.
 
 
 There are four scripts in the current directory:
