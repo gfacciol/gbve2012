@@ -1,0 +1,21 @@
+This MATLAB code provides an implementation for Sadek, Facciolo, Arias, Caselles,
+"A variational model for gradient-based video editing.", Submitted IJCV, 2012.
+
+
+There are four scripts in the current directory:
+experiment_hand.m
+experiment_cloth.m
+experiment_bob.m 
+experiment_bob_bc.m
+each will load the sequences, optical flows and masks from the data directory  
+and then run an experiment by calling vp.m.
+The function vp.m (in the utils directory) implements the algorithm described in the paper.
+This implementation corresponds to the re-writing of the energy described in 
+the supplementary material: http://www.dtic.upf.edu/~rsadek/gbve/gbve_sup_mat.pdf
+
+The parameters of the code are named as in the paper, and the argument "algo"
+refers to the algorithm to be used. For instance BW_GBC uses the Backward
+scheme with GBC Gradient Brigthness Change model Eq (20). FWBW_GBC minimizes
+the energy with the hybrid scheme of Eq. (34), and FWBW_BC uses the Brightness 
+Constancy model [16]:  \sum | h_v^even  u |^2.
+
