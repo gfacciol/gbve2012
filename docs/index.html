@@ -1,0 +1,226 @@
+
+<!-- saved from url=(0037)http://www.dtic.upf.edu/~rsadek/gbve/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>A variational model for gradient-based video editing</title>
+<link href="./A variational model for gradient-based video editing_files/style.css" rel="stylesheet" type="text/css" media="screen">
+<style type="text/css"></style></head>
+
+<!-- Codes by Quackit.com -->
+<script type="text/javascript">
+   // Popup window code
+   function Popup(url) {
+      popupWindow = window.open(url,'Infinite loop','height=300,width=1010,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=no'); 
+      }
+</script>
+<!-- example <a href="JavaScript:Popup('http://www.quackit.com/html/html_help.cfm');">Open a popup window</a> -->
+
+
+
+<body>
+
+	<h1>A variational model for gradient-based video editing</h1> <br>
+	<center> 
+	<p class="abstract">  <b>Abstract:</b> In this work we present a gradient-based variational model for video
+	editing, addressing the problem of propagating gradient-domain information
+	along the optical flow of the video. The resulting propagation is
+	temporally consistent and blends seamlessly with its spatial surroundings.
+	In addition, the presented model is able to cope with additive illumination
+	changes and handles occlusions/dis-occlusions. The problem of propagation
+	along the optical flow arises in different video editing applications. In
+	this work we consider the application where a user edits a frame by modifying
+	the texture of an object's surface and wishes to propagate this editing
+	throughout the video.
+	</p>
+
+   </br>
+   <p>
+   <b>Full paper:</b> <a href=http://link.springer.com/article/10.1007%2Fs11263-012-0597-5>"A Variational Model for Gradient-Based Video Editing", IJCV, 2012.</a> 
+   </p>
+
+   <h2>Supplementary Materials: </h2> 
+   <p>
+   The <i>supplementary material document</i> to the sumbitted paper can be downloaded from <a href="http://www.dtic.upf.edu/~rsadek/gbve/gbve_sup_mat.pdf">here</a> </p>
+
+   <p>
+   A <b>MATLAB</b> code with data to test it can be downloaded from <a href="http://www.dtic.upf.edu/~rsadek/gbve/matlab/gbve_matlab_code_and_data.zip">here</a>, or one could download only the MATLAB code <a href="http://www.dtic.upf.edu/~rsadek/gbve/matlab/gbve_matlab_code.zip">here</a> and the different testing data seperately: <a href="http://www.dtic.upf.edu/~rsadek/gbve/matlab/bob_data.zip">magazine seq</a>, <a href="http://www.dtic.upf.edu/~rsadek/gbve/matlab/cloth_tilt_data.zip">cloth tilt sequence</a> and <a href="http://www.dtic.upf.edu/~rsadek/gbve/matlab/hand_data.zip">hand sequence</a> </p>
+
+   <p><i><b>Note 1:</b></i> The animations suffer from some distortions due to downsampling and compression. Please download the "<a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/ALL_avis.zip">avi's</a>" or "<a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/ALL_pngs.zip">png's</a>" to get the full un-compressed results.</p>
+   <p><i><b>Note 2:</b></i> The animations will run just once, click on each figure to repeat. One could always download the original "<a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/ALL_avis.zip">avi's</a>" or "<a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/ALL_pngs.zip">png's</a>".</p>
+	
+	<table rules="rows">
+
+		<tbody><tr>
+			<th colspan="6">One lid setting experiments</th>
+		</tr>
+		<tr>
+			<td><b>Sequence name</b></td>
+			<td width=202px><b>Input sequence</b></td>
+			<td width=202px><b>Editing domain</b></td>
+			<td width=202px><b>Result</b></td>
+			<td colspan="2"><b>Download</b></td>
+
+		</tr>
+
+		<tr>
+			<td>Coca-cola sequence</td>
+         <td colspan="3" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_coca_all.gif');"><img src="./A variational model for gradient-based video editing_files/coca_all.gif" alt="a small gif animation of the original coca-cola sequence, the edit domain and the result"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/coca/avis.zip">avi</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/coca/pngs.zip">png</a></td>
+		</tr>
+
+		<tr>
+			<td>Magazine sequence</td>
+         <td colspan="3" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_mag_all.gif');"><img src="./A variational model for gradient-based video editing_files/mag_all.gif" alt="a small gif animation of the magazine experiment, the edit domain and the result"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/mag_seq/avis.zip">avi</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/mag_seq/pngs.zip">png</a></td>
+		</tr>
+
+		<tr>
+			<td>Cloth wave</td>
+         <td colspan="3" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_cloth_wave_all.gif');"><img src="./A variational model for gradient-based video editing_files/cloth_wave_all.gif" alt="a small gif animation of the cloth wave  sequence, the edit domain and the result"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cloth_wave/avis.zip">avi</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cloth_wave/pngs.zip">png</a></td>
+		</tr>
+
+		<tr>
+			<td>Can and Box sequence</td>
+         <td colspan="3" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_cans_1_lid_all.gif');"><img src="./A variational model for gradient-based video editing_files/cans_1_lid_all.gif" alt="a small gif animation of the can and box experiment, the edit domain and the 1-lid result"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cans/avis.zip">avi</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cans/pngs.zip">png</a></td>
+		</tr>
+
+	</tbody></table>
+
+	<table rules="rows">
+		<tbody><tr>
+			<th colspan="6">Two lid setting experiments</th>
+		</tr>
+		<tr>
+			<td><b>Sequence name</b></td>
+			<td width=202px><b>Input sequence</b></td>
+			<td width=202px><b>Editing domain</b></td>
+			<td width=202px><b>Result</b></td>
+			<td colspan="2"><b>Download</b></td>
+
+		</tr>
+
+		<tr>
+			<td>Can and Box sequence</td>
+         <td colspan="3" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_cans_2_lid_all.gif');"><img src="./A variational model for gradient-based video editing_files/cans_2_lid_all.gif" alt="a small gif animation of the can and box experiment, the edit domain ant the 2-lid result"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cans/avis.zip">avi</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cans/pngs.zip">png</a></td>
+		</tr>
+
+		<tr>
+			<td>Screen sequence <br>(The files to download <br> include results with <br> different optical flow algos)</td>
+         <td colspan="3" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_screen_all.gif');"><img src="./A variational model for gradient-based video editing_files/screen_all.gif" alt="a small gif animation of the screen experiment, the edit domain and the 2-lid result"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/screen_seq/avis.zip">avi</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/screen_seq/pngs.zip">png</a></td>
+		</tr>
+
+		<tr>
+			<td>Pen holder sequence</td>
+         <td colspan="3" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_table_all.gif');"><img src="./A variational model for gradient-based video editing_files/table_all.gif" alt="a small gif animation of the pen holder experiment, the edit domain and the 2-lid result"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/table_seq/avis.zip">avi</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/table_seq/pngs.zip">png</a></td>
+		</tr>
+
+	</tbody></table>
+
+
+	<table rules="rows">
+		<tbody><tr>
+			<th colspan="7">Double occlusion</th>
+		</tr>
+		<tr>
+			<td><b>Sequence name</b></td>
+			<td width=202px><b>Input sequence</b></td>
+			<td width=202px><b>Editing domain</b></td>
+			<td width=202px><b>Result (not handled)</b></td>
+			<td width=202px><b>Result (corrected)</b></td>
+			<td colspan="2"><b>Download</b></td>
+
+		</tr>
+
+		<tr>
+			<td>Hand (double occlusion)</td>
+         <td colspan="4" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_hand_all.gif');"><img src="./A variational model for gradient-based video editing_files/hand_all.gif" alt="a small gif animation of the hand experiment, the edit domain, a result without handling the double occlusion and the result obtained with occlusion handling"></a></td>
+         <td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/hand_bad/avis.zip">avi (not handled)</a> </br> </br> 
+			    <a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/hand_corrected/avis.zip">avi (corrected)</a></td>
+          <td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/hand_bad/pngs.zip">png (not handled)</a></br> </br> 
+			    <a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/hand_corrected/pngs.zip">png (corrected)</a></td>
+		</tr>
+
+
+	</tbody></table>
+
+
+	<table rules="rows">
+		<tbody><tr>
+			<th colspan="6">A zoom-in case (we edit the last frame and propagate backwards)</th>
+		</tr>
+		<tr>
+			<td><b>Sequence name</b></td>
+			<td width=202px><b>Input sequence</b></td>
+			<td width=202px><b>Editing domain</b></td>
+			<td width=202px><b>Result </b></td>
+			<td colspan="2"><b>Download</b></td>
+
+		</tr>
+
+		<tr>
+			<td>Cliff (a zoom in sequence)</td>
+         <td colspan="3" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_cliff_all.gif');"><img src="./A variational model for gradient-based video editing_files/cliff_all.gif" alt="a small gif animation of the cliff experiment, the edit domain and the result"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cliff/avis.zip">avi </a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cliff/pngs.zip">png </a></td>
+		</tr>
+
+
+	</tbody></table>
+
+
+	<table rules="rows">
+		<tbody><tr>
+			<th colspan="12">Zoom and tilt</th>
+		</tr>
+		<tr>
+			<td><b>Sequence name</b></td>
+			<td width=202px><b>Input sequence</b></td>
+			<td width=202px><b>Editing domain</b></td>
+			<td width=202px><b>Result (1-lid bilinear)</b></td>
+			<td width=202px><b>Result (1-lid bicubic)</b></td>
+			<td width=202px><b>Result (2-lid bilinear)</b></td>
+			<td colspan="6"><b>Download</b></td>
+
+		</tr>
+
+		<tr>
+			<td>Cloth tilt</td>
+         <td colspan="5" class="GIF"><a href="JavaScript:Popup('./A variational model for gradient-based video editing_files/inf_cloth_tilt_all.gif');"><img src="./A variational model for gradient-based video editing_files/cloth_tilt_all.gif" alt="a small gif animation of a zoom and tilt experiment, the edit domain, the 1-lid result using bilinear interpolation, the 1-lid result using bicubic interpolation and the 2-lid result with bilinear interpolation"></a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cloth_tilt_1_lid_bilinear/avis.zip">avi (1-lid bilinear)</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cloth_tilt_1_lid_bilinear/pngs.zip">png (1-lid bilinear)</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cloth_tilt_1_lid_bicubic/avis.zip">avi (1-lid bicubic)</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cloth_tilt_1_lid_bicubic/pngs.zip">png (1-lid bicubic)</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cloth_tilt_2_lid_bilinear/avis.zip">avi (2-lid bilinear)</a></td>
+			<td><a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/cloth_tilt_2_lid_bilinear/pngs.zip">png (2-lid bilinear)</a></td>
+		</tr>
+
+
+	</tbody></table>
+
+
+
+	<p>
+		To download all the videos please click <a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/ALL_avis.zip">here</a>. 
+	</p>
+	<p>
+		To download all the image frames please click <a href="http://www.dtic.upf.edu/~rsadek/gbve/paper_results/ALL_pngs.zip">here</a>. 
+	</p>
+
+	</center>
+
+
+
+
+
+</body></html>
