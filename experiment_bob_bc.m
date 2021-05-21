@@ -12,13 +12,14 @@ FLOW_BW_PATT= 'data/bob/OFD/bw_%03d.mat';
 OUT_DIR     = 'data/bob/results/';
 LIDS        = 'FIRST';  % 'FIRST' 'LAST', 'BOTH'
 
-ALGO='FWBW_BC';         %'FWBW_GBC' 'FW_GBC' 'BW_GBC' 'FWBW_BC' 'FW_BC' 'BW_BC'
+params.ALGO='FWBW_BC';         %'FWBW_GBC' 'FW_GBC' 'BW_GBC' 'FWBW_BC' 'FW_BC' 'BW_BC'
                         % GBC=Global Brightness Change model
                         % BC =Brightness Constancy model
 
-BETA=0.95;              % FBBW/BWFW mix    ONLY FOR FWBW_*
-LAMBDA=0.00;            % SPATIAL REGULARITY 0.02    ONLY FOR FWBW_* 
-GAMMA =0.00;            % TEMPORAL REGULARITY USUALLY 0, ONLY for FWBW_GBC 
+params.BETA=0.95;              % FBBW/BWFW mix    ONLY FOR FWBW_*
+params.LAMBDA=0.00;            % SPATIAL REGULARITY 0.02    ONLY FOR FWBW_* 
+params.GAMMA =0.00;            % TEMPORAL REGULARITY USUALLY 0, ONLY for FWBW_GBC 
+params.INTERP='BICUBIC';      % INTERPOLATION: 'BILINEAR' 'BICUBIC'
 
 %%% PRE ALLOCATE VIDEOS
 %  dimensions: [y, x, frame, channel]
@@ -113,7 +114,7 @@ end
 
 
 %% show input
-figure(1);    colormap gray;
+clf; colormap gray;
 for t= 1:nt
     subplot(1,3,1);  imagesc( squeeze(u0(:,:,t,:))/255, [0,1])
     subplot(1,3,2);  imagesc( m(:,:,t))
@@ -121,14 +122,28 @@ for t= 1:nt
     drawnow;
 end
 
+
+%%
+% tic
+% uu=u0;
+% for t=1:2:nt-1
+%     mv=m;
+%     mv(:,:,t) = 0;
+%     tmp = vp(uu(:,:,t:t+2,:), mv(:,:,t:t+2), uu(:,:,t:t+2,:),...
+%         v_fw(:,:,t:t+2,:), v_bw(:,:,t:t+2,:), ALGO, BETA, LAMBDA, GAMMA );
+%     uu(:,:,t:t+2,:) =  reshape(tmp,size(uu(:,:,t:t+2,:)));
+% end
+% toc
+% u0=uu;
+
 %%% call the method
 tic
-uu = vp(u0, m, u0, v_fw, v_bw, ALGO, BETA, LAMBDA, GAMMA, occ_fw, occ_bw);
+uu = vp(u0, m, u0, v_fw, v_bw, params , occ_fw, occ_bw);
 toc
 
 
 %% show result
-figure(1);    colormap gray;
+clf; colormap gray;
 mkdir(OUT_DIR);    
 uuf = filterHF(uu);
 for t= 1:nt

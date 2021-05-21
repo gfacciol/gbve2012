@@ -2,7 +2,6 @@ function out = filterHF(in)
 % Hipomode filter of a video % G.F.
 
 [nx,ny,nt,nch] = size(in);
-
 % construct the filter
 t=zeros(2*nx,2*ny);
 t(1,1)=1/4;

@@ -1,36 +1,40 @@
 %%% PARAMETERS
 clear
 addpath('utils')
+addpath('utils/multi')
 
-FRAMENUM    =  [2:38]; %[1,2,54,55]
-IMAGES_PATT = 'data/bob/input_color/frame%03d.png';
-MASKS_PATT  = 'data/bob/masks/mask_%03d.png';
-FLOW_FW_PATT= 'data/bob/OFD/fw_%03d.mat';
-FLOW_BW_PATT= 'data/bob/OFD/bw_%03d.mat';
-%OCC_FW_PATT = 'data/bob/OFD/occ_gbve_fw%03d.png'; 
-%OCC_BW_PATT = 'data/bob/OFD/occ_gbve_bw%03d.png'; 
-OUT_DIR     = 'data/bob/results/';
+FRAMENUM    =  [2:60]; %[1,2,54,55]
+IMAGES_PATT = 'data/mesa/frames/Images_%03d.png';
+MASKS_PATT  = 'data/mesa/mask/Mask_%03d.png';
+FLOW_FW_PATT= 'data/mesa/OFD/HOMOGRfw%03d.mat';
+FLOW_BW_PATT= 'data/mesa/OFD/HOMOGRbw%03d.mat';
+%FLOW_FW_PATT= 'data/mesa/OFD/SUN_fw%03d.mat';
+%FLOW_BW_PATT= 'data/mesa/OFD/SUN_bw%03d.mat';
+%OCC_FW_PATT = 'data/cloth/OFD/occ_gbve_fw%03d.png'; 
+%OCC_BW_PATT = 'data/cloth/OFD/occ_gbve_bw%03d.png'; 
+OUT_DIR     = 'data/mesa/results/';
 LIDS        = 'FIRST';  % 'FIRST' 'LAST', 'BOTH'
 
-params.ALGO='FWBW_GBC';        %'FWBW_GBC' 'FW_GBC' 'BW_GBC' 'FWBW_BC' 'FW_BC' 'BW_BC'
+params.ALGO='FWBW_BC';        %'FWBW_GBC' 'FW_GBC' 'BW_GBC' 'FWBW_BC' 'FW_BC' 'BW_BC'
                         % GBC=Global Brightness Change model
                         % BC =Brightness Constancy model
 
-params.BETA=0.95;              % FBBW/BWFW mix    ONLY FOR FWBW_*
+params.BETA=1;              % FBBW/BWFW mix    ONLY FOR FWBW_*
 params.LAMBDA=0.00;            % SPATIAL REGULARITY 0.02    ONLY FOR FWBW_* 
 params.GAMMA =0.00;            % TEMPORAL REGULARITY USUALLY 0, ONLY for FWBW_GBC 
 params.INTERP='BICUBIC';      % INTERPOLATION: 'BILINEAR' 'BICUBIC'
+params.CGprec=0.001;
 
 %%% PRE ALLOCATE VIDEOS
 %  dimensions: [y, x, frame, channel]
 [nx,ny,nch]    = size(imread(sprintf(IMAGES_PATT , FRAMENUM(1) )));
-u0    = zeros( nx, ny, numel(FRAMENUM), nch);
-%u0    = zeros( nx, ny, numel(FRAMENUM), 1);
-m     = zeros( nx, ny, numel(FRAMENUM), 1);
+%u0    = zeros( nx, ny, numel(FRAMENUM), nch);
+u0    = zeros( nx, ny, numel(FRAMENUM), 1);
+m     = false( nx, ny, numel(FRAMENUM), 1);
 v_fw  = zeros( nx, ny, numel(FRAMENUM), 2);
 v_bw  = zeros( nx, ny, numel(FRAMENUM), 2);
-occ_fw= ones ( nx, ny, numel(FRAMENUM), 1);
-occ_bw= ones ( nx, ny, numel(FRAMENUM), 1);
+occ_fw= true ( nx, ny, numel(FRAMENUM), 1);
+occ_bw= true ( nx, ny, numel(FRAMENUM), 1);
 
 %%% LOAD VIDEOS AND FLOWS
 j=1;
@@ -40,8 +44,8 @@ for i =  FRAMENUM
     Im = sprintf(IMAGES_PATT , i);
     Im = imread(Im);
     if(size(Im,3)==3)            % FOR THE MOMENT ONLY BW
-        u0(:,:,j,:)=double((Im)); 
-        %u0(:,:,j,:)=double(rgb2gray(Im)); 
+        %u0(:,:,j,:)=double((Im)); 
+        u0(:,:,j,:)=double(rgb2gray(Im)); 
     else
         u0(:,:,j)=double(Im(:,:,1)); 
     end   
@@ -49,7 +53,7 @@ for i =  FRAMENUM
     % masks
     Im = sprintf(MASKS_PATT , i);
     Im = imread(Im);
-    m(:,:,j) = double(Im(:,:,1));
+    m(:,:,j) = logical(Im(:,:,1));
     
     % flows FW
     Im = sprintf(FLOW_FW_PATT , i);
@@ -57,6 +61,7 @@ for i =  FRAMENUM
         load(Im)
     else
         uv = repmat ( m(:,:,j)*0,[1,1,2]);
+        disp(['not found (setting to 0):', Im])
     end
     v_fw(:,:,j,:) = uv(:,:,:);
     
@@ -66,6 +71,7 @@ for i =  FRAMENUM
         load(Im)
     else
         uv = repmat ( m(:,:,j)*0,[1,1,2]);
+        disp(['not found (setting to 0):', Im])
     end
     v_bw(:,:,j,:) = uv(:,:,:);    
     
@@ -152,6 +158,6 @@ for t= 1:nt
     subplot(1,3,3);  imagesc( min(max(squeeze(uuf(:,:,t,:))/255,0),1), [0,1])
     drawnow;    pause(0.1);
 
-    imwrite(uint8 ( min(max(squeeze(uu(:,:,t,:)),0),255)), sprintf('%s/out%s_b%g_l%g_g%g_%03d.png', OUT_DIR,ALGO, BETA, LAMBDA, GAMMA, t) )
-    imwrite(uint8 ( min(max(squeeze(uu(:,:,t,:)),0),255)), sprintf('%s/out_filt_%s_b%g_l%g_g%g_%03d.png', OUT_DIR,ALGO, BETA, LAMBDA, GAMMA, t) )
+%    imwrite(uint8 ( min(max(squeeze(uu(:,:,t,:)),0),255)), sprintf('%s/out%s_b%g_l%g_g%g_%03d.png', OUT_DIR,params.ALGO, params.BETA, params.LAMBDA, params.GAMMA, t) )
+%    imwrite(uint8 ( min(max(squeeze(uu(:,:,t,:)),0),255)), sprintf('%s/out_filt_%s_b%g_l%g_g%g_%03d.png', OUT_DIR,params.ALGO, params.BETA, params.LAMBDA, params.GAMMA, t) )
 end
